@@ -22,11 +22,19 @@ function onClick(e) {
 	}
 }
 
+function clearHandlers() {
+	console.log("approved")
+	for (var i=0;i<playHandlers.length;i++) {
+		var p = playHandlers[i]
+		p[0].removeEventListener('play', p[1])
+	}
+}
+
 document.addEventListener("click", onClick)
 
 function watchForVideos() {
 	if (approved) {
-		clearHandlers(playHandlers)
+		clearHandlers()
 		return
 	}
 	var vid = document.getElementsByTagName('video')
@@ -37,18 +45,15 @@ function watchForVideos() {
 			console.log("processing")
 			function onPlay() {
 				if (approved) {
-					clearHandlers(playHandlers)
+					clearHandlers()
 					return
 				}
 				console.log("forcing pause")
 				pauseAll()
 			}
 			v.addEventListener('play', onPlay )
-			playHandlers.push( onPlay )
+			playHandlers.push( [v,onPlay] )
 			v.processedByMe = true
-		}
-		else {
-			console.log("already processed")
 		}
 	}
 	count++;
