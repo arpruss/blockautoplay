@@ -1,10 +1,12 @@
 {
   "manifest_version": 2,
  
-  "name": "Try to block autoplay",
-  "version": "0.0.1",
-  "description": "Pause videos in first second of operation.",
+  "name": "Yet another autoplay blocker",
+  "version": "0.0.2",
+  "description": "Pause videos until you click on them.",
   
+  "icons": { "128": "icon128.png" },
+
   "content_scripts": [{
     "js": ["inject.js"],
 	 "matches": ["http://*/*", "https://*/*"]
